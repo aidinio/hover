@@ -2,6 +2,7 @@ wibox = require("wibox")
 gears = require("gears")
 naughty = require("naughty")
 beautiful = require("beautiful")
+awful = require("awful")
 
 function bar(args)
 	theme_module = "hover.themes." .. args.theme
@@ -9,6 +10,11 @@ function bar(args)
 	fonts = require(theme_module .. ".fonts")
 	colors = require(theme_module .. ".colors")
 	icons = require(theme_module .. ".icons")
+	bar_buttons = gears.table.join(
+	   awful.button({}, 1, function(c)
+			 panel.visible = not panel.visible
+	   end)
+	)
 	bar = wibox.widget {
 		{
 			{
@@ -83,7 +89,6 @@ function bar(args)
 						layout = wibox.layout.align.horizontal,
 					},
 					layout = wibox.layout.align.horizontal,
-					forced_width = 436 - 15 * 2,
 				},
 				layout = wibox.layout.align.vertical,
 			},
@@ -91,7 +96,6 @@ function bar(args)
 			left = 15,
 			right = 15
 		},
-		--valign = "center",
 		shape = function(cr)
 			gears.shape.rounded_rect(cr, 436, 39, 33)
 		end,
@@ -99,6 +103,85 @@ function bar(args)
 		forced_width = 436,
 		widget = wibox.widget.background,
 	}
+	bar:buttons(bar_buttons)
+	panel = awful.popup {
+		widget = {
+			{
+				{
+					{
+						{
+							{
+								{
+									{
+										markup = string.format("<span foreground='%s'>19:58</span>", colors.text),
+										font = fonts.panel.clock,
+										widget = wibox.widget.textbox,
+									},
+									{
+										{
+											{
+												{
+													markup = string.format("<span foreground='%s'>October</span>", colors.text),
+													font = fonts.panel.month_and_day,
+													widget = wibox.widget.textbox,
+												},
+												{
+													markup = string.format("<span foreground='%s'>Friday</span>", colors.text),
+													font = fonts.panel.month_and_day,
+													widget = wibox.widget.textbox,
+												},
+												layout = wibox.layout.fixed.vertical,
+												spacing = -5
+											},
+											widget = wibox.container.margin,
+											top = 8,
+										},
+										widget = wibox.container.margin,
+										left = 7
+									},
+									layout = wibox.layout.fixed.horizontal,
+								},
+								nil,
+								{
+									markup = string.format("<span foreground='%s'>12/10/2023</span>", colors.text),
+									font = fonts.panel.date,
+									widget = wibox.widget.textbox,
+								},
+								layout = wibox.layout.align.horizontal
+							},
+							widget = wibox.container.margin,
+							left = 15,
+							right = 15,
+						},
+						widget = wibox.container.background,
+						bg = "#15191C",
+						shape = function(cr, width)
+							gears.shape.rounded_rect(cr, width, 68, 12)
+						end,
+						forced_height = 68,
+					},
+					widget = wibox.container.margin,
+					left = 15,
+					right = 15,
+					top = 15,
+				},
+				layout = wibox.layout.fixed.vertical
+			},
+			widget = wibox.widget.background,
+			bg = "#000000"
+		},
+		shape = function(cr)
+			gears.shape.rounded_rect(cr, 436, 795, 21)
+		end,
+		placement = function(cr)
+			awful.placement.top_right(cr, { margins = { top = 10 + 39 + 10, right = 10 } })
+		end,
+		visible = true,
+		screen = args.screen,
+		minimum_width = 436,
+		minimum_height = 795,
+	}
 	return bar
 end
+
 return bar
