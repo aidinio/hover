@@ -1,3 +1,3 @@
 return {
-   bar = "Roboto Medium 8.6",
+   bar = "Roboto Medium 7.8",
 }
