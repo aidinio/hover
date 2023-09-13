@@ -390,7 +390,8 @@ function bar(args)
 														end,
 													},
 													layout = wibox.layout.align.horizontal
-												},{
+												},
+												{
 													{
 														{
 															{
@@ -432,7 +433,7 @@ function bar(args)
 													layout = wibox.layout.align.horizontal
 												},
 												layout = wibox.layout.fixed.vertical,
-												spacing = 19,
+												spacing = 27,
 											},
 											widget = wibox.container.margin,
 											top = 15,
@@ -452,11 +453,76 @@ function bar(args)
 								},
 								{
 									{
+										nil,
 										{
-											markup = "placeholder",
-											widget = wibox.widget.textbox
+											{
+												{
+													{
+														markup = string.format("<span foreground='%s'>Friday</span>", "#000000"),
+														widget = wibox.widget.textbox,
+														halign = "center",
+													},
+													widget = wibox.container.background,
+													bg = "#C6E7FC",
+													shape = function(cr)
+														gears.shape.rounded_rect(cr, 30, 30, 20)
+													end,
+													forced_width = 30,
+													valign = "center",
+												},
+												{
+													{
+														markup = string.format("<span foreground='%s'>Friday</span>", "#000000"),
+														widget = wibox.widget.textbox,
+														halign = "center",
+													},
+													widget = wibox.container.background,
+													bg = "#C6E7FC",
+													shape = function(cr)
+														gears.shape.rounded_rect(cr, 30, 30, 20)
+													end,
+													forced_width = 30,
+													valign = "center",
+												},
+												{
+													{
+														markup = string.format("<span foreground='%s'>Friday</span>", "#000000"),
+														widget = wibox.widget.textbox,
+														halign = "center",
+													},
+													widget = wibox.container.background,
+													bg = "#C6E7FC",
+													shape = function(cr)
+														gears.shape.rounded_rect(cr, 30, 30, 20)
+													end,
+													forced_width = 30,
+													valign = "center",
+												},
+												{
+													{
+														markup = string.format("<span foreground='%s'>Friday</span>", "#000000"),
+														widget = wibox.widget.textbox,
+														valign = "center",
+													},
+													widget = wibox.container.background,
+													bg = "#C6E7FC",
+													shape = function(cr, width, height)
+														gears.shape.rounded_rect(cr, 30, 30, 20)
+													end,
+													forced_width = 30,
+													valign = "center",
+												},
+												layout = wibox.layout.fixed.horizontal,
+												--max_widget_size = 30,
+												spacing = 33,
+												forced_height = 20,
+											},
+											widget = wibox.container.margin,
+											left = 15,
+											right = 15,
+											top = 7
 										},
-										layout = wibox.layout.fixed.horizontal
+										layout = wibox.layout.align.vertical,
 									},
 									widget = wibox.container.background,
 									bg = "#15191C",
@@ -471,6 +537,200 @@ function bar(args)
 							layout = wibox.layout.align.horizontal
 						},
 						layout = wibox.layout.fixed.vertical,
+					},
+					widget = wibox.container.margin,
+					left = 15,
+					right = 15,
+					top = 15,
+				},
+				{
+					{
+						{
+							{
+								{
+									{
+										{
+											{
+												{
+													image = gears.color.recolor_image(icons("battery-charging"), "#A3BE8C"),
+													resize = false,
+													forced_width = 24,
+													widget = wibox.widget.imagebox,
+													valign = "center",
+												},
+												{
+													markup = string.format("<span foreground='%s'>75%%</span>", "#A3BE8C"),
+													font = fonts.bar,
+													widget = wibox.widget.textbox,
+													forced_width = 35,
+												},
+												spacing = 5,
+												layout = wibox.layout.fixed.horizontal,
+											},
+											{
+												max_value = 100,
+												value = 75,
+												forced_height = 19,
+												forced_width = 0,
+												--paddings = 3,
+												background_color = "#0000",
+												color = "#A3BE8C",
+												widget = wibox.widget.progressbar,
+												shape = function(cr, width, height)
+													gears.shape.partially_rounded_rect(cr, width, height, false, true, true,
+														false)
+												end,
+												bar_shape = function(cr, width, height)
+													gears.shape.partially_rounded_rect(cr, width, height, false, true, true,
+														false)
+												end,
+											},
+											layout = wibox.layout.align.horizontal,
+											forced_height = 16
+										},
+										widget = wibox.container.margin,
+										top = 6,
+										bottom = 6,
+										left = 15,
+										right = 6,
+									},
+									widget = wibox.widget.background,
+									bg = "#36402E",
+									shape = function(cr, width, height)
+										gears.shape.rounded_rect(cr, width, height, 25)
+									end
+								},
+								widget = wibox.container.margin,
+								left = 15,
+								right = 15,
+								top = 15,
+							},
+							{
+								{
+									{
+										{
+											{
+												{
+													image = gears.color.recolor_image(icons("ram"), "#C6E7FC"),
+													resize = false,
+													forced_width = 24,
+													widget = wibox.widget.imagebox,
+													valign = "center",
+												},
+												{
+													markup = string.format("<span foreground='%s'>75%%</span>", "#C6E7FC"),
+													font = fonts.bar,
+													widget = wibox.widget.textbox,
+													forced_width = 35,
+												},
+												spacing = 5,
+												layout = wibox.layout.fixed.horizontal,
+											},
+											{
+												max_value = 100,
+												value = 50,
+												forced_height = 19,
+												forced_width = 0,
+												--paddings = 3,
+												background_color = "#0000",
+												color = "#C6E7FC",
+												widget = wibox.widget.progressbar,
+												shape = function(cr, width, height)
+													gears.shape.partially_rounded_rect(cr, width, height, false, true, true,
+														false)
+												end,
+												bar_shape = function(cr, width, height)
+													gears.shape.partially_rounded_rect(cr, width, height, false, true, true,
+														false)
+												end,
+											},
+											layout = wibox.layout.align.horizontal,
+											forced_height = 16
+										},
+										widget = wibox.container.margin,
+										top = 6,
+										bottom = 6,
+										left = 15,
+										right = 6,
+									},
+									widget = wibox.widget.background,
+									bg = "#2E3440",
+									shape = function(cr, width, height)
+										gears.shape.rounded_rect(cr, width, height, 25)
+									end
+								},
+								widget = wibox.container.margin,
+								left = 15,
+								right = 15,
+							},
+							{
+								{
+									{
+										{
+											{
+												{
+													image = gears.color.recolor_image(icons("cpu"), "#BF616A"),
+													resize = false,
+													forced_width = 24,
+													widget = wibox.widget.imagebox,
+													valign = "center",
+												},
+												{
+													markup = string.format("<span foreground='%s'>75%%</span>", "#BF616A"),
+													font = fonts.bar,
+													widget = wibox.widget.textbox,
+													forced_width = 35,
+												},
+												spacing = 5,
+												forced_height = 30,
+												layout = wibox.layout.fixed.horizontal,
+											},
+											{
+												max_value = 100,
+												value = 100,
+												forced_height = 19,
+												forced_width = 0,
+												--paddings = 3,
+												background_color = "#0000",
+												color = "#BF616A",
+												widget = wibox.widget.progressbar,
+												shape = function(cr, width, height)
+													gears.shape.partially_rounded_rect(cr, width, height, false, true, true,
+														false)
+												end,
+												bar_shape = function(cr, width, height)
+													gears.shape.partially_rounded_rect(cr, width, height, false, true, true,
+														false)
+												end,
+											},
+											layout = wibox.layout.align.horizontal,
+											forced_height = 16
+										},
+										widget = wibox.container.margin,
+										top = 6,
+										bottom = 6,
+										left = 15,
+										right = 6,
+									},
+									widget = wibox.widget.background,
+									bg = "#402E2E",
+									shape = function(cr, width, height)
+										gears.shape.rounded_rect(cr, width, height, 25)
+									end
+								},
+								widget = wibox.container.margin,
+								left = 15,
+								right = 15,
+								bottom = 15,
+							},
+							layout = wibox.layout.fixed.vertical,
+							spacing = 20,
+						},
+						widget = wibox.container.background,
+						bg = "#15191C",
+						shape = function(cr, width, height)
+							gears.shape.rounded_rect(cr, width, height)
+						end,
 					},
 					widget = wibox.container.margin,
 					left = 15,
