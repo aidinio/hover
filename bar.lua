@@ -101,7 +101,7 @@ function bar(args)
 		end,
 		bg = "#000000",
 		forced_width = 436,
-		widget = wibox.widget.background,
+		widget = wibox.container.background,
 	}
 	bar:buttons(bar_buttons)
 	panel = awful.popup {
@@ -350,7 +350,8 @@ function bar(args)
 														end,
 													},
 													layout = wibox.layout.align.horizontal
-												},{
+												},
+												{
 													{
 														{
 															{
@@ -594,7 +595,7 @@ function bar(args)
 										left = 15,
 										right = 6,
 									},
-									widget = wibox.widget.background,
+									widget = wibox.container.background,
 									bg = "#36402E",
 									shape = function(cr, width, height)
 										gears.shape.rounded_rect(cr, width, height, 25)
@@ -653,7 +654,7 @@ function bar(args)
 										left = 15,
 										right = 6,
 									},
-									widget = wibox.widget.background,
+									widget = wibox.container.background,
 									bg = "#2E3440",
 									shape = function(cr, width, height)
 										gears.shape.rounded_rect(cr, width, height, 25)
@@ -712,7 +713,7 @@ function bar(args)
 										left = 15,
 										right = 6,
 									},
-									widget = wibox.widget.background,
+									widget = wibox.container.background,
 									bg = "#402E2E",
 									shape = function(cr, width, height)
 										gears.shape.rounded_rect(cr, width, height, 25)
@@ -737,9 +738,161 @@ function bar(args)
 					right = 15,
 					top = 15,
 				},
+				{
+					{
+						{
+							{
+								widget = wibox.widget.textbox,
+								markup = "PLACEHOLDER",
+							},
+							widget = wibox.container.margin,
+							top = 15,
+							left = 15,
+							right = 15,
+							bottom = 15,
+						},
+						widget = wibox.container.background,
+						bg = "#15191C",
+						shape = function(cr, width, height)
+							gears.shape.rounded_rect(cr, width, height)
+						end,
+					},
+					widget = wibox.container.margin,
+					left = 15,
+					right = 15,
+					top = 15,
+				},
+				{
+					{
+						{
+							{
+								{
+									{
+										{
+											{
+												{
+													image = gears.color.recolor_image(icons("screenshot"), "#C6E7FC"),
+													resize = true,
+													widget = wibox.widget.imagebox,
+													forced_width = 24,
+													forced_height = 24,
+													valign = "center"
+												},
+												{
+													markup = string.format("<span foreground='%s'>Screenshot taken!</span>",
+														colors.text),
+													font = fonts.bar,
+													widget = wibox.widget.textbox,
+												},
+												{
+													markup = string.format(
+														"<span foreground='%s'>Path: /home/user/Pictures/screenshot.png</span>",
+														colors.text),
+													font = fonts.bar,
+													widget = wibox.widget.textbox,
+												},
+												layout = wibox.layout.fixed.horizontal,
+												spacing = 5,
+												forced_width = 310,
+												forced_height = 30,
+											},
+											nil,
+											{
+												image = gears.color.recolor_image(icons("x"), "#9A9EA6"),
+												resize = true,
+												forced_width = 24,
+												forced_height = 24,
+												widget = wibox.widget.imagebox,
+												valign = "center"
+											},
+											layout = wibox.layout.align.horizontal
+										},
+										widget = wibox.container.margin,
+										top = 7,
+										bottom = 7,
+										left = 14,
+										right = 14,
+									},
+									widget = wibox.container.background,
+									bg = "#2E3440",
+									shape = function(cr, width, height)
+										gears.shape.rounded_rect(cr, width, height)
+									end
+								},
+								{
+									{
+										{
+											{
+												{
+													image = gears.color.recolor_image(icons("bell"), "#C6E7FC"),
+													resize = true,
+													widget = wibox.widget.imagebox,
+													forced_width = 24,
+													forced_height = 24,
+													valign = "center"
+												},
+												{
+													markup = string.format("<span foreground='%s'>Low battery alert</span>", colors.text),
+													font = fonts.bar,
+													widget = wibox.widget.textbox,
+												},
+												{
+													markup = string.format(
+														"<span foreground='%s'>You have only 15%% battery left</span>", colors.text),
+													font = fonts.bar,
+													widget = wibox.widget.textbox,
+												},
+												layout = wibox.layout.fixed.horizontal,
+												spacing = 5,
+												forced_width = 310,
+												forced_height = 30,
+											},
+											nil,
+											{
+												image = gears.color.recolor_image(icons("x"), "#9A9EA6"),
+												resize = true,
+												forced_width = 24,
+												forced_height = 24,
+												widget = wibox.widget.imagebox,
+												valign = "center"
+											},
+											layout = wibox.layout.align.horizontal
+										},
+										widget = wibox.container.margin,
+										top = 7,
+										bottom = 7,
+										left = 14,
+										right = 14,
+									},
+									widget = wibox.container.background,
+									bg = "#2E3440",
+									shape = function(cr, width, height)
+										gears.shape.rounded_rect(cr, width, height)
+									end
+								},
+								layout = wibox.layout.fixed.vertical,
+								spacing = 15
+							},
+							widget = wibox.container.margin,
+							top = 15,
+							left = 15,
+							right = 15,
+							bottom = 15,
+						},
+						widget = wibox.container.background,
+						bg = "#15191C",
+						shape = function(cr, width, height)
+							gears.shape.rounded_rect(cr, width, height)
+						end,
+					},
+					widget = wibox.container.margin,
+					left = 15,
+					right = 15,
+					top = 15,
+				},
 				layout = wibox.layout.fixed.vertical
 			},
-			widget = wibox.widget.background,
+			widget = wibox.container.background,
 			bg = "#000000"
 		},
 		shape = function(cr)
