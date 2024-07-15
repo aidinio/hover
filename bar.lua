@@ -69,29 +69,40 @@ function bar(args)
 		end)
 	)
 	wifi_widget = require("hover.widget.wifi")().widget
+
+
+	-- local clock = wibox.widget{
+	-- 	markup = string.format("<span foreground='%s'>12:32</span>", colors.text),
+	-- 	font = fonts.bar,
+	-- 	widget = wibox.widget.textbox,
+	-- 	changetime = function(self, new_time)
+	-- 		self.markup = string.format("<span foreground='%s'>%s</span>", colors.text, new_time)
+	-- 	end
+	-- }
+
+	local clock = require("hover.widget.bar.clock")
+	-- mycount = 5
+	-- gears.timer {
+	-- 	timeout = 1,
+	-- 	call_now = true,
+	-- 	autostart = true,
+	-- 	callback = function()
+	-- 		naughty.notify { title = "A MESSAGE FROM THE TIMER!" }
+	-- 		clock:changetime("" .. mycount)
+	-- 		mycount = mycount + 1
+	-- 	end
+	-- }
+	
+	local battery_widget = require("hover.widget.bar.battery")
+
 	bar = wibox.widget {
 		{
 			{
 				nil,
 				{
 					{
-						{
-							markup = string.format("<span foreground='%s'>12:32</span>", colors.text),
-							font = fonts.bar,
-							widget = wibox.widget.textbox,
-						},
-						{
-							markup = string.format("<span foreground='%s'>Monday</span>", colors.text),
-							font = fonts.bar,
-							widget = wibox.widget.textbox,
-						},
-						{
-							markup = string.format("<span foreground='%s'>July 15th</span>", colors.text),
-							font = fonts.bar,
-							widget = wibox.widget.textbox,
-						},
+						clock,
 						layout = wibox.layout.fixed.horizontal,
-						spacing = 6,
 					},
 					nil,
 					{
@@ -118,25 +129,7 @@ function bar(args)
 								widget = wibox.widget.imagebox,
 								valign = "center"
 							},
-							{
-								{
-									nil,
-									{
-										image = gears.color.recolor_image(icons("battery-charging"), "#A3BE8C"),
-										resize = true,
-										forced_width = 24,
-										widget = wibox.widget.imagebox,
-										valign = "center"
-									},
-									layout = wibox.layout.align.horizontal,
-								},
-								{
-									markup = string.format("<span foreground='%s'>100%%</span>", colors.text),
-									font = fonts.bar,
-									widget = wibox.widget.textbox,
-								},
-								layout = wibox.layout.fixed.horizontal
-							},
+							battery_widget,
 							layout = wibox.layout.fixed.horizontal,
 							spacing = 3,
 						},
