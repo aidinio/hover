@@ -18,5 +18,5 @@ Now, you can use it as a widget in your AwesomeWM bar:
 		}
 ...
 ```
-# Current state
+# Current state: In progress...
 ![screenshot](./current_state.png)
