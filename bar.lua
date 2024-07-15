@@ -76,17 +76,17 @@ function bar(args)
 				{
 					{
 						{
-							markup = string.format("<span foreground='%s'>19:57</span>", colors.text),
+							markup = string.format("<span foreground='%s'>12:32</span>", colors.text),
 							font = fonts.bar,
 							widget = wibox.widget.textbox,
 						},
 						{
-							markup = string.format("<span foreground='%s'>Sunday</span>", colors.text),
+							markup = string.format("<span foreground='%s'>Monday</span>", colors.text),
 							font = fonts.bar,
 							widget = wibox.widget.textbox,
 						},
 						{
-							markup = string.format("<span foreground='%s'>October 12th</span>", colors.text),
+							markup = string.format("<span foreground='%s'>July 15th</span>", colors.text),
 							font = fonts.bar,
 							widget = wibox.widget.textbox,
 						},
@@ -167,7 +167,7 @@ function bar(args)
 							{
 								{
 									{
-										markup = string.format("<span foreground='%s'>19:58</span>", colors.text),
+										markup = string.format("<span foreground='%s'>12:32</span>", colors.text),
 										font = fonts.panel.clock,
 										widget = wibox.widget.textbox,
 									},
@@ -175,12 +175,12 @@ function bar(args)
 										{
 											{
 												{
-													markup = string.format("<span foreground='%s'>October</span>", colors.text),
+													markup = string.format("<span foreground='%s'>July</span>", colors.text),
 													font = fonts.panel.month_and_day,
 													widget = wibox.widget.textbox,
 												},
 												{
-													markup = string.format("<span foreground='%s'>Friday</span>", colors.text),
+													markup = string.format("<span foreground='%s'>Monday</span>", colors.text),
 													font = fonts.panel.month_and_day,
 													widget = wibox.widget.textbox,
 												},
@@ -197,7 +197,7 @@ function bar(args)
 								},
 								nil,
 								{
-									markup = string.format("<span foreground='%s'>12/10/2023</span>", colors.text),
+									markup = string.format("<span foreground='%s'>15/07/2024</span>", colors.text),
 									font = fonts.panel.date,
 									widget = wibox.widget.textbox,
 								},
@@ -615,7 +615,7 @@ function bar(args)
 								},
 								{
 									{
-										markup = string.format("<span foreground='%s'>50:23/53:80</span>", colors.text),
+										markup = string.format("<span foreground='%s'>31:38/53:80</span>", colors.text),
 										font = fonts.panel.music_player.duration,
 										align = "center",
 										widget = wibox.widget.textbox,
