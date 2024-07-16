@@ -69,8 +69,9 @@ function bar(args)
 		end)
 	)
 	wifi_widget = require("hover.widget.wifi")().widget
-
-
+	local battery_status_bar = require("hover.widget.main.battery")
+	local ram_status_bar = require("hover.widget.main.ram")
+	local cpu_status_bar = require("hover.widget.main.cpu")
 	-- local clock = wibox.widget{
 	-- 	markup = string.format("<span foreground='%s'>12:32</span>", colors.text),
 	-- 	font = fonts.bar,
@@ -542,21 +543,20 @@ function bar(args)
 					{
 						{
 							{
-								require("hover.widget.wrapper.status_bar")("battery-charging", "#A3BE8C", "#36402E", 75).widget,
+								battery_status_bar,
 								widget = wibox.container.margin,
 								left = 15,
 								right = 15,
 								top = 15,
 							},
 							{
-								require("hover.widget.wrapper.status_bar")("ram", "#C6E7FC", "#2E3440", 50).widget,
-								
+								ram_status_bar,
 								widget = wibox.container.margin,
 								left = 15,
 								right = 15,
 							},
 							{
-								require("hover.widget.wrapper.status_bar")("cpu", "#BF616A", "#402E2E", 100).widget,
+								cpu_status_bar,
 								widget = wibox.container.margin,
 								left = 15,
 								right = 15,

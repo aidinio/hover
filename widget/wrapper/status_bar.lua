@@ -1,4 +1,4 @@
-function status_bar(icon_name, foreground, background, percentage)
+function status_bar(icon, foreground, background, percentage)
     -- result = ""
     -- local function networkMonitor()
     --     awful.spawn.easy_async_with_shell("ping -c 1 google.com", function(stdout, stderr, exitreason, exitcode)
@@ -19,63 +19,96 @@ function status_bar(icon_name, foreground, background, percentage)
     --     call_now = true,
     --     callback = networkMonitor
     -- }
-    return {
-        widget =
+    icon = icons(icon)
+    local image_widget = wibox.widget.base.make_widget_declarative {
+        image = gears.color.recolor_image(icon, foreground),
+        resize = false,
+        forced_width = 25,
+        widget = wibox.widget.imagebox,
+        valign = "center",
+        update = function(self)
+            self.image = gears.color.recolor_image(icon, foreground)
+        end
+    }
+    
+    local text_widget = wibox.widget.base.make_widget_declarative {
+        markup = string.format("<span foreground='%s'>%s%%</span>", foreground, percentage),
+        font = fonts.bar,
+        widget = wibox.widget.textbox,
+        forced_width = 40,
+        update = function(self)
+            self.markup = string.format("<span foreground='%s'>%s%%</span>", foreground, percentage)
+        end,
+    }
+
+    local bar_widget = wibox.widget.base.make_widget_declarative {
+        max_value = 100,
+        value = percentage,
+        forced_height = 19,
+        forced_width = 0,
+        paddings = 0,
+        background_color = "#fff0",
+        color = foreground,
+        widget = wibox.widget.progressbar,
+        shape = function(cr, width, height)
+            gears.shape.partially_rounded_rect(cr, width, height, false, true,
+                true,
+                false)
+        end,
+        bar_shape = function(cr, width, height)
+            gears.shape.partially_rounded_rect(cr, width, height, false, true,
+                true,
+                false)
+        end,
+        update = function(self)
+            self.color = foreground
+            self.value = percentage
+        end
+    }
+    
+    return wibox.widget.base.make_widget_declarative {
+        update_icon = function (new_icon)
+            icon = new_icon
+            image_widget:update()
+        end,
+        update_value = function (value)
+            percentage = value
+            text_widget:update()
+            bar_widget:update()
+        end,
+        update_foreground = function (new_foreground)
+            foreground = new_foreground
+            text_widget:update()
+            bar_widget:update()
+            image_widget:update()
+        end,
+        update_background = function (self, new_background)
+            background = new_background
+            self.bg = background
+        end,
         {
             {
                 {
-                    {
-                        {
-                            image = gears.color.recolor_image(icons(icon_name), foreground),
-                            resize = false,
-                            forced_width = 24,
-                            widget = wibox.widget.imagebox,
-                            valign = "center",
-                        },
-                        {
-                            markup = string.format("<span foreground='%s'>%s%%</span>", foreground, percentage),
-                            font = fonts.bar,
-                            widget = wibox.widget.textbox,
-                            forced_width = 35,
-                        },
-                        spacing = 5,
-                        layout = wibox.layout.fixed.horizontal,
-                    },
-                    {
-                        max_value = 100,
-                        value = percentage,
-                        forced_height = 19,
-                        forced_width = 0,
-                        --paddings = 3,
-                        background_color = "#0000",
-                        color = foreground,
-                        widget = wibox.widget.progressbar,
-                        shape = function(cr, width, height)
-                            gears.shape.partially_rounded_rect(cr, width, height, false, true,
-                                true,
-                                false)
-                        end,
-                        bar_shape = function(cr, width, height)
-                            gears.shape.partially_rounded_rect(cr, width, height, false, true,
-                                true,
-                                false)
-                        end,
-                    },
-                    layout = wibox.layout.align.horizontal,
-                    forced_height = 16
+                    image_widget,
+                    text_widget,
+                    spacing = 5,
+                    layout = wibox.layout.fixed.horizontal,
                 },
-                widget = wibox.container.margin,
-                top = 6,
-                bottom = 6,
-                left = 15,
-                right = 6,
+                bar_widget,
+                layout = wibox.layout.align.horizontal,
+                forced_height = 16
             },
-            widget = wibox.container.background,
-            bg = background,
-            shape = function(cr, width, height)
-                gears.shape.rounded_rect(cr, width, height, 25)
-            end
-        }
+            widget = wibox.container.margin,
+            top = 6,
+            bottom = 6,
+            left = 15,
+            right = 6,
+        },
+        widget = wibox.container.background,
+        bg = background,
+        shape = function(cr, width, height)
+            gears.shape.rounded_rect(cr, width, height, 25)
+        end
     }
 end
 

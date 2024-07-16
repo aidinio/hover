@@ -60,12 +60,19 @@ percentage_value = string.match(tostring(device.percentage), "(.*)%.")
 percentage_widget:update_text()
 icon_path = get_battery_icon(device.state, device.percentage)
 icon_widget:update_icon()
+awesome.emit_signal("battery::changed", {
+    state = device.state,
+    icon_path = icon_path,
+    percentage = device.percentage,
+    percentage_text = percentage_value
+})
 
 device.on_notify = function (_)
     percentage_value = string.match(tostring(device.percentage), "(.*)%.")
     percentage_widget:update_text()
     icon_path = get_battery_icon(device.state, device.percentage)
     icon_widget:update_icon()
-    end
+    awesome.emit_signal("battery::changed", {state = device.state, icon_path = icon_path, percentage = device.percentage, percentage_text = percentage_value})
+end
 
 return battery
