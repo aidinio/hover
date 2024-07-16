@@ -4,10 +4,10 @@ cairo = require("lgi").cairo
 function svgsurf(context, cr, width, height)
 	width = 30
 	height = 30
-	naughty.notify({
-		title = "WOWW",
-		text = "HELLO"
-	})
+	-- naughty.notify({
+	-- 	title = "WOWW",
+	-- 	text = "HELLO"
+	-- })
 	local svg_surface = gears.surface("/home/aidin/.config/awesome/hover/theme/nord_m/icon/bluetooth-connected.svg")
 
 	local image_surface = gears.surface("/home/aidin/.config/awesome/hover/theme/nord_m/icon/bluetooth-connected.svg")
@@ -17,10 +17,10 @@ function svgsurf(context, cr, width, height)
 	resized_cr:scale(height / image_surface.width, height / image_surface.height)
 	resized_cr:set_source_surface(image_surface, 0, 0)
 	resized_cr:paint()
-	naughty.notify({
-		title = "svg_surface",
-		text = "svg_surface " .. svg_surface.width
-	})
+	-- naughty.notify({
+	-- 	title = "svg_surface",
+	-- 	text = "svg_surface " .. svg_surface.width
+	-- })
 	-- local resized_surface = svg_surface:take_surface()
 	-- local cr = cairo.Context(resized_surface)
 	-- cr:set_source_surface(svg_surface, 0, 0)
