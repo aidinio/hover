@@ -68,33 +68,20 @@ function bar(args)
 			panel.visible = not panel.visible
 		end)
 	)
-	wifi_widget = require("hover.widget.wifi")().widget
+	local wifi_widget = require("hover.widget.main.wifi")().widget
+	wifi_widget:toggle("off")
+	local bluetooth_widget = require("hover.widget.main.bluetooth")().widget
+	-- wifi_widget = require("hover.widget.wrapper.switch")("wifi").widget
 	local battery_status_bar = require("hover.widget.main.battery")
 	local ram_status_bar = require("hover.widget.main.ram")
 	local cpu_status_bar = require("hover.widget.main.cpu")
-	-- local clock = wibox.widget{
-	-- 	markup = string.format("<span foreground='%s'>12:32</span>", colors.text),
-	-- 	font = fonts.bar,
-	-- 	widget = wibox.widget.textbox,
-	-- 	changetime = function(self, new_time)
-	-- 		self.markup = string.format("<span foreground='%s'>%s</span>", colors.text, new_time)
-	-- 	end
-	-- }
-
 	local clock = require("hover.widget.bar.clock")
-	-- mycount = 5
-	-- gears.timer {
-	-- 	timeout = 1,
-	-- 	call_now = true,
-	-- 	autostart = true,
-	-- 	callback = function()
-	-- 		naughty.notify { title = "A MESSAGE FROM THE TIMER!" }
-	-- 		clock:changetime("" .. mycount)
-	-- 		mycount = mycount + 1
-	-- 	end
-	-- }
-	
 	local battery_widget = require("hover.widget.bar.battery")
+	local time_widdget = require("hover.widget.main.time")
+	local microphone_widget = require("hover.widget.main.microphone")().widget
+	local bluelight_widget = require("hover.widget.main.bluelight")().widget
+	local silent_widget = require("hover.widget.main.silent")().widget
+	local airplane_widget = require("hover.widget.main.airplane")().widget
 
 	bar = wibox.widget {
 		{
@@ -227,7 +214,7 @@ function bar(args)
 													right = 15
 												},
 												{
-													wifi_widget,
+													bluetooth_widget,
 													widget = wibox.container.margin,
 													right = 18
 												},
@@ -236,20 +223,12 @@ function bar(args)
 											},
 											{
 												{
-													require("hover.widget.wifi")().widget,
+													microphone_widget,
 													widget = wibox.container.margin,
 													right = 15
 												},
 												{
-													{
-														require("hover.widget.wifi")().widget,
-														widget = wibox.container.background,
-														bg = "#C6E7FC",
-														shape = function(cr)
-															gears.shape.rounded_rect(cr, 45, 45, 30)
-														end,
-														forced_width = 45
-													},
+													bluelight_widget,
 													widget = wibox.container.margin,
 													right = 18
 												},
@@ -258,17 +237,13 @@ function bar(args)
 											},
 											{
 												{
-													require("hover.widget.wifi")().widget,
+													silent_widget,
 													widget = wibox.container.margin,
 													right = 15
 												},
 												{
 													{
-														{
-															markup = string.format("<span foreground='%s'>Friday</span>", colors.text),
-															widget = wibox.widget.textbox,
-															halign = "right"
-														},
+														airplane_widget,
 														widget = wibox.container.background,
 														bg = "#C6E7FC",
 														shape = function(cr)

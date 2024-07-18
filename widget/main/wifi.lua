@@ -10,11 +10,12 @@ end
 awesome.connect_signal(custom_event, event_handler)
 
 function wifi()
-   wifi_widget = switch().widget
+   local wifi_widget = switch("wifi-high-bold").widget
    wifi_widget.buttons  = gears.table.join(
 	  awful.button({}, 1, function ()
 			naughty.notify {title = "Hello"}
 			awesome.emit_signal(custom_event)
+			wifi_widget:toggle()
 	  end)
    )
 	return {

@@ -1,4 +1,4 @@
-function wifi()
+function airplane()
    wifi_widget = switch().widget
    wifi_widget.buttons  = gears.table.join(
 	  awful.button({}, 1, function ()
@@ -11,4 +11,4 @@ function wifi()
 	}
 end
 
-return wifi
+return airplane
