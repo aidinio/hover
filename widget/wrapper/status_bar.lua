@@ -1,36 +1,19 @@
 function status_bar(icon, foreground, background, percentage)
-    -- result = ""
-    -- local function networkMonitor()
-    --     awful.spawn.easy_async_with_shell("ping -c 1 google.com", function(stdout, stderr, exitreason, exitcode)
-    --         -- Handle the output or errors here
-    --         if exitcode == 0 then
-    --             result = "Network is reachable"
-    --         else
-    --             result = "Network is unreachable"
-    --         end
-    --         naughty.notify({
-    --             title = result
-    --         })
-    --     end)
-    -- end
-    -- local my_timer = gears.timer {
-    --     timeout = 3,
-    --     autostart = true,
-    --     call_now = true,
-    --     callback = networkMonitor
-    -- }
     icon = icons(icon)
     local image_widget = wibox.widget.base.make_widget_declarative {
         image = gears.color.recolor_image(icon, foreground),
-        resize = false,
+        -- resize = true,
+        -- upscale = true,
         forced_width = 25,
+        forced_height = 25,
         widget = wibox.widget.imagebox,
         valign = "center",
         update = function(self)
             self.image = gears.color.recolor_image(icon, foreground)
-        end
+        end,
+        point = { x = 13, y = 1 }
     }
-    
+
     local text_widget = wibox.widget.base.make_widget_declarative {
         markup = string.format("<span foreground='%s'>%s%%</span>", foreground, percentage),
         font = fonts.bar,
@@ -44,7 +27,8 @@ function status_bar(icon, foreground, background, percentage)
     local bar_widget = wibox.widget.base.make_widget_declarative {
         max_value = 100,
         value = percentage,
-        forced_height = 19,
+        forced_height = 10,
+        height = 10,
         forced_width = 0,
         paddings = 0,
         background_color = "#fff0",
@@ -65,50 +49,60 @@ function status_bar(icon, foreground, background, percentage)
             self.value = percentage
         end
     }
-    
+
     return wibox.widget.base.make_widget_declarative {
-        update_icon = function (new_icon)
+        update_icon = function(new_icon)
             icon = new_icon
             image_widget:update()
         end,
-        update_value = function (value)
+        update_value = function(value)
             percentage = value
             text_widget:update()
             bar_widget:update()
         end,
-        update_foreground = function (new_foreground)
+        update_foreground = function(new_foreground)
             foreground = new_foreground
             text_widget:update()
             bar_widget:update()
             image_widget:update()
         end,
-        update_background = function (self, new_background)
+        update_background = function(self, new_background)
             background = new_background
             self.bg = background
         end,
+        -- wibox.widget.seperator,wibox.widget.seperator,
         {
             {
                 {
-                    image_widget,
-                    text_widget,
-                    spacing = 5,
-                    layout = wibox.layout.fixed.horizontal,
+                    {
+                        wibox.widget.seperator,
+                        {
+                            text_widget,
+                            bar_widget,
+                            layout = wibox.layout.align.horizontal,
+                        },
+                        layout = wibox.layout.align.horizontal,
+                    },
+                    widget = wibox.container.margin,
+                    top = 6,
+                    bottom = 6,
+                    left = 45,
+                    right = 6,
                 },
-                bar_widget,
-                layout = wibox.layout.align.horizontal,
-                forced_height = 16
+                widget = wibox.container.background,
+                bg = background,
+                shape = function(cr, width, height)
+                    gears.shape.rounded_rect(cr, width, height, 25)
+                end,
+                forced_width = 1000,
+                point = { x = 0, y = 0 }
             },
-            widget = wibox.container.margin,
-            top = 6,
-            bottom = 6,
-            left = 15,
-            right = 6,
+            image_widget,
+            layout = wibox.layout.manual,
         },
-        widget = wibox.container.background,
-        bg = background,
-        shape = function(cr, width, height)
-            gears.shape.rounded_rect(cr, width, height, 25)
-        end
+        layout = wibox.layout.align.horizontal,
+        forced_height = 27,
+        forced_width = 340
     }
 end
 

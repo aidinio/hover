@@ -242,15 +242,7 @@ function bar(args)
 													right = 15
 												},
 												{
-													{
-														airplane_widget,
-														widget = wibox.container.background,
-														bg = "#C6E7FC",
-														shape = function(cr)
-															gears.shape.rounded_rect(cr, 45, 45, 30)
-														end,
-														forced_width = 45
-													},
+													airplane_widget,
 													widget = wibox.container.margin,
 													right = 18
 												},
@@ -437,8 +429,10 @@ function bar(args)
 										{
 											{
 												{
-													markup = string.format("<span foreground='%s'>Friday</span>", "#000000"),
-													widget = wibox.widget.textbox,
+													image = icons("power"),
+													forced_width = 5,
+													resize = true,
+													widget = wibox.widget.imagebox,
 													halign = "center",
 												},
 												widget = wibox.container.background,
@@ -446,7 +440,7 @@ function bar(args)
 												shape = function(cr)
 													gears.shape.rounded_rect(cr, 30, 30, 20)
 												end,
-												forced_width = 30,
+												-- forced_width = 10,
 											},
 											{
 												{
@@ -487,7 +481,7 @@ function bar(args)
 												forced_width = 30,
 											},
 											layout = wibox.layout.flex.horizontal,
-											--spacing = 33,
+											spacing = 33,
 											forced_height = 20,
 										},
 										widget = wibox.container.margin,
