@@ -77,11 +77,15 @@ function bar(args)
 	local cpu_status_bar = require("hover.widget.main.cpu")
 	local clock = require("hover.widget.bar.clock")
 	local battery_widget = require("hover.widget.bar.battery")
-	local time_widdget = require("hover.widget.main.time")
+	local time_widget = require("hover.widget.main.time")
 	local microphone_widget = require("hover.widget.main.microphone")().widget
 	local bluelight_widget = require("hover.widget.main.bluelight")().widget
 	local silent_widget = require("hover.widget.main.silent")().widget
 	local airplane_widget = require("hover.widget.main.airplane")().widget
+	local shutdown_button = require("hover.widget.main.shutdown")
+	local restart_button = require("hover.widget.main.restart")
+	local sleep_button = require("hover.widget.main.sleep")
+	local lock_button = require("hover.widget.main.lock")
 
 	bar = wibox.widget {
 		{
@@ -427,59 +431,10 @@ function bar(args)
 								{
 									{
 										{
-											{
-												{
-													image = icons("power"),
-													forced_width = 5,
-													resize = true,
-													widget = wibox.widget.imagebox,
-													halign = "center",
-												},
-												widget = wibox.container.background,
-												bg = "#C6E7FC",
-												shape = function(cr)
-													gears.shape.rounded_rect(cr, 30, 30, 20)
-												end,
-												-- forced_width = 10,
-											},
-											{
-												{
-													markup = string.format("<span foreground='%s'>Friday</span>", "#000000"),
-													widget = wibox.widget.textbox,
-													halign = "center",
-												},
-												widget = wibox.container.background,
-												bg = "#C6E7FC",
-												shape = function(cr)
-													gears.shape.rounded_rect(cr, 30, 30, 20)
-												end,
-												forced_width = 30,
-											},
-											{
-												{
-													markup = string.format("<span foreground='%s'>Friday</span>", "#000000"),
-													widget = wibox.widget.textbox,
-												},
-												widget = wibox.container.background,
-												bg = "#C6E7FC",
-												shape = function(cr)
-													gears.shape.rounded_rect(cr, 30, 30, 20)
-												end,
-												forced_width = 30,
-											},
-											{
-												{
-													markup = string.format("<span foreground='%s'>Friday</span>", "#000000"),
-													widget = wibox.widget.textbox,
-													valign = "center",
-												},
-												widget = wibox.container.background,
-												bg = "#C6E7FC",
-												shape = function(cr, width, height)
-													gears.shape.rounded_rect(cr, 30, 30, 20)
-												end,
-												forced_width = 30,
-											},
+											shutdown_button,
+											restart_button,
+											sleep_button,
+											lock_button,
 											layout = wibox.layout.flex.horizontal,
 											spacing = 33,
 											forced_height = 20,
@@ -487,7 +442,8 @@ function bar(args)
 										widget = wibox.container.margin,
 										left = 15,
 										right = 15,
-										top = 7
+										top = 7,
+										bottom = 7
 									},
 									widget = wibox.container.background,
 									bg = "#15191C",

@@ -38,7 +38,6 @@ function switch(icon)
 		-- image = gears.color.recolor_image(icons(icon), "#2E3440"),
 		image = icons(icon),
 		resize = true,
-		resize_allowed = false,
 		forced_width = 26,
 		widget = wibox.widget.imagebox,
 		stylesheet = "* { fill: #0E3440 }",
