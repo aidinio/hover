@@ -100,7 +100,7 @@ function bar(args)
 					{
 						{
 							{
-								image = gears.color.recolor_image(icons("eyeglass"), "#C6E7FC"),
+								image = gears.color.recolor_image(icons("eyeglasses"), "#C6E7FC"),
 								resize = true,
 								forced_width = 19,
 								widget = wibox.widget.imagebox,
@@ -657,7 +657,7 @@ function bar(args)
 										{
 											{
 												{
-													image = gears.color.recolor_image(icons("bell"), "#C6E7FC"),
+													image = gears.color.recolor_image(icons("battery-warning"), "#C6E7FC"),
 													resize = true,
 													widget = wibox.widget.imagebox,
 													forced_width = 24,
