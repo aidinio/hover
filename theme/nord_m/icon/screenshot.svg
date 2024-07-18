@@ -1,14 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-screenshot" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M7 19a2 2 0 0 1 -2 -2" />
-  <path d="M5 13v-2" />
-  <path d="M5 7a2 2 0 0 1 2 -2" />
-  <path d="M11 5h2" />
-  <path d="M17 5a2 2 0 0 1 2 2" />
-  <path d="M19 11v2" />
-  <path d="M19 17v4" />
-  <path d="M21 19h-4" />
-  <path d="M13 19h-2" />
-</svg>
-
-
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 256 256"><path d="M244,192a12,12,0,0,1-12,12H204v28a12,12,0,0,1-24,0V204H64a12,12,0,0,1-12-12V76H24a12,12,0,0,1,0-24H52V24a12,12,0,0,1,24,0V180H232A12,12,0,0,1,244,192ZM104,76h76v76a12,12,0,0,0,24,0V64a12,12,0,0,0-12-12H104a12,12,0,0,0,0,24Z"></path></svg>
