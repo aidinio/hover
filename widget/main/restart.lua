@@ -1,4 +1,13 @@
 local wibox = require("wibox")
 local button = require("hover.widget.wrapper.button")
+local restart_widget = button("restart")
 
-return button("restart")
+restart_widget:buttons(gears.table.join(
+    restart_widget:buttons(),
+    awful.button({}, 1, nil, function ()
+        os.execute("reboot")
+    end)
+))
+
+
+return restart_widget
