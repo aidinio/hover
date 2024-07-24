@@ -86,7 +86,10 @@ function bar(args)
 	local restart_button = require("hover.widget.main.restart")
 	local sleep_button = require("hover.widget.main.sleep")
 	local lock_button = require("hover.widget.main.lock")
-
+	local volume_slider = require("hover.widget.main.volume")
+	local brightness_slider = require("hover.widget.main.brightness")
+	local microphone_slider = require("hover.widget.main.microphone_slider")
+	
 	bar = wibox.widget {
 		{
 			{
@@ -277,138 +280,9 @@ function bar(args)
 									{
 										{
 											{
-												{
-													{
-														{
-															{
-																image = gears.color.recolor_image(icons("volume"), "#C6E7FC"),
-																resize = true,
-																forced_width = 18,
-																widget = wibox.widget.imagebox,
-																valign = "center"
-															},
-															widget = wibox.container.margin,
-															left = 5,
-															right = 5
-														},
-														widget = wibox.container.background,
-														forced_height = 19,
-														shape = function(cr, width, height)
-															gears.shape.partially_rounded_rect(cr, 100, height, true,
-																false, false, true)
-														end,
-														bg = "#2E3440",
-													},
-													{
-														max_value = 100,
-														value = 50,
-														forced_height = 19,
-														forced_width = 0,
-														--paddings = 3,
-														background_color = "#2E3440",
-														color = "#C6E7FC",
-														widget = wibox.widget.progressbar,
-														shape = function(cr, width, height)
-															gears.shape.partially_rounded_rect(cr, width, height, false,
-																true, true,
-																false)
-														end,
-														bar_shape = function(cr, width, height)
-															gears.shape.partially_rounded_rect(cr, width, height, false,
-																true, true,
-																false)
-														end,
-													},
-													layout = wibox.layout.align.horizontal
-												},
-												{
-													{
-														{
-															{
-																image = gears.color.recolor_image(icons("brightness-half"), "#C6E7FC"),
-																resize = true,
-																forced_width = 18,
-																widget = wibox.widget.imagebox,
-																valign = "center"
-															},
-															widget = wibox.container.margin,
-															left = 5,
-															right = 5
-														},
-														widget = wibox.container.background,
-														forced_height = 19,
-														shape = function(cr, width, height)
-															gears.shape.partially_rounded_rect(cr, 100, height, true,
-																false, false, true)
-														end,
-														bg = "#2E3440",
-													},
-													{
-														max_value = 100,
-														value = 50,
-														forced_height = 19,
-														forced_width = 0,
-														-- paddings = 3,
-														background_color = "#2E3440",
-														color = "#C6E7FC",
-														widget = wibox.widget.progressbar,
-														shape = function(cr, width, height)
-															gears.shape.partially_rounded_rect(cr, width, height, false,
-																true, true,
-																false)
-														end,
-														bar_shape = function(cr, width, height)
-															gears.shape.partially_rounded_rect(cr, width, height, false,
-																true, true,
-																false)
-														end,
-													},
-													layout = wibox.layout.align.horizontal
-												},
-												{
-													{
-														{
-															{
-																image = gears.color.recolor_image(icons("microphone"), "#C6E7FC"),
-																resize = true,
-																forced_width = 18,
-																widget = wibox.widget.imagebox,
-																valign = "center"
-															},
-															widget = wibox.container.margin,
-															left = 5,
-															right = 5
-														},
-														widget = wibox.container.background,
-														forced_height = 19,
-														shape = function(cr, width, height)
-															gears.shape.partially_rounded_rect(cr, 100, height, true,
-																false, false, true)
-														end,
-														bg = "#2E3440",
-													},
-													{
-														max_value = 100,
-														value = 50,
-														forced_height = 19,
-														forced_width = 0,
-														--paddings = 3,
-														background_color = "#2E3440",
-														color = "#C6E7FC",
-														widget = wibox.widget.progressbar,
-														shape = function(cr, width, height)
-															gears.shape.partially_rounded_rect(cr, width, height, false,
-																true, true,
-																false)
-														end,
-														bar_shape = function(cr, width, height)
-															gears.shape.partially_rounded_rect(cr, width, height, false,
-																true, true,
-																false)
-														end,
-													},
-													layout = wibox.layout.align.horizontal
-												},
+												volume_slider,
+												brightness_slider,
+												microphone_slider,
 												layout = wibox.layout.fixed.vertical,
 												spacing = 27,
 											},
