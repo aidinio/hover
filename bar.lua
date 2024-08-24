@@ -155,22 +155,26 @@ function bar(args)
 							{
 								{
 									{
-										markup = string.format("<span foreground='%s'>12:32</span>", colors.text),
+										-- markup = string.format("<span foreground='%s'>12:32</span>", colors.text),
+										format = string.format("<span foreground='%s'>%s</span>", colors.text, "%H:%M"),
 										font = fonts.panel.clock,
-										widget = wibox.widget.textbox,
+										widget = wibox.widget.textclock,
+										refresh = 1,
 									},
 									{
 										{
 											{
 												{
-													markup = string.format("<span foreground='%s'>July</span>", colors.text),
+													-- markup = string.format("<span foreground='%s'>July</span>", colors.text),
+													format = string.format("<span foreground='%s'>%s</span>", colors.text, "%B"),
 													font = fonts.panel.month_and_day,
-													widget = wibox.widget.textbox,
+													widget = wibox.widget.textclock,
 												},
 												{
-													markup = string.format("<span foreground='%s'>Monday</span>", colors.text),
+													-- markup = string.format("<span foreground='%s'>Monday</span>", colors.text),
+													format = string.format("<span foreground='%s'>%s</span>", colors.text, "%A"),
 													font = fonts.panel.month_and_day,
-													widget = wibox.widget.textbox,
+													widget = wibox.widget.textclock,
 												},
 												layout = wibox.layout.fixed.vertical,
 												spacing = -5
@@ -185,9 +189,10 @@ function bar(args)
 								},
 								nil,
 								{
-									markup = string.format("<span foreground='%s'>15/07/2024</span>", colors.text),
+									-- markup = string.format("<span foreground='%s'>15/07/2024</span>", colors.text),
+									format = string.format("<span foreground='%s'>%s</span>", colors.text, "%d/%m/%Y"),
 									font = fonts.panel.date,
-									widget = wibox.widget.textbox,
+									widget = wibox.widget.textclock,
 								},
 								layout = wibox.layout.align.horizontal
 							},

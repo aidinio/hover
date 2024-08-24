@@ -1,28 +1,5 @@
 local function slider(icon_name)
-    return wibox.widget.base.make_widget_declarative
-    {
-    {
-        {
-            {
-                image = gears.color.recolor_image(icons(icon_name), "#C6E7FC"),
-                resize = true,
-                forced_width = 18,
-                widget = wibox.widget.imagebox,
-                valign = "center"
-            },
-            widget = wibox.container.margin,
-            left = 5,
-            right = 5
-        },
-        widget = wibox.container.background,
-        forced_height = 19,
-        shape = function(cr, width, height)
-            gears.shape.partially_rounded_rect(cr, 100, height, true,
-                false, false, true)
-        end,
-        bg = "#2E3440",
-    },
-    {
+    local bar_widget = wibox.widget.base.make_widget_declarative {
         max_value = 100,
         value = 50,
         forced_height = 19,
@@ -41,9 +18,43 @@ local function slider(icon_name)
                 true, true,
                 false)
         end,
-    },
-    layout = wibox.layout.align.horizontal
-}
+    }
+    local slider_widget = wibox.widget.base.make_widget_declarative
+        {
+            {
+                {
+                    {
+                        image = gears.color.recolor_image(icons(icon_name), "#C6E7FC"),
+                        resize = true,
+                        forced_width = 18,
+                        widget = wibox.widget.imagebox,
+                        valign = "center"
+                    },
+                    widget = wibox.container.margin,
+                    left = 5,
+                    right = 5
+                },
+                widget = wibox.container.background,
+                forced_height = 19,
+                shape = function(cr, width, height)
+                    gears.shape.partially_rounded_rect(cr, 100, height, true,
+                        false, false, true)
+                end,
+                bg = "#2E3440",
+            },
+            bar_widget,
+            layout = wibox.layout.align.horizontal,
+            update_value = function (new_value)
+                bar_widget.value = new_value
+            end
+        }
+
+        bar_widget:connect_signal("button::press", function (_, lx, ly, _, _, specs)
+            naughty.notify {title = "HI"}
+            slider_widget.update_value((lx) / (specs.width) * 100)
+        end)
+
+    return slider_widget
 end
 
 return slider
