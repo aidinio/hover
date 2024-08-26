@@ -1,8 +1,8 @@
 local gears = require("gears")
+local math = math
 
 local status_bar = require("hover.widget.wrapper.status_bar")
 local ram_bar = status_bar("ram", "#C6E7FC", "#2E3440", 50)
-local math = math
 
 gears.timer {
     timeout = 1,
