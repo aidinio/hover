@@ -1,5 +1,6 @@
 local wibox = require("wibox")
 local gears = require("gears")
+local naughty = require("naughty")
 
 local function slider(icon_name)
     local bar_widget = wibox.widget.base.make_widget_declarative {

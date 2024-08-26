@@ -54,6 +54,32 @@ function status_bar(icon, foreground, background, percentage)
         end
     }
 
+    local background_widget = wibox.widget.base.make_widget_declarative {
+        {
+            {
+                wibox.widget.seperator,
+                {
+                    text_widget,
+                    bar_widget,
+                    layout = wibox.layout.align.horizontal,
+                },
+                layout = wibox.layout.align.horizontal,
+            },
+            widget = wibox.container.margin,
+            top = 6,
+            bottom = 6,
+            left = 45,
+            right = 6,
+        },
+        widget = wibox.container.background,
+        bg = background,
+        shape = function(cr, width, height)
+            gears.shape.rounded_rect(cr, width, height, 25)
+        end,
+        forced_width = 1000,
+        point = { x = 0, y = 0 }
+    }
+
     return wibox.widget.base.make_widget_declarative {
         update_icon = function(new_icon)
             icon = new_icon
@@ -70,37 +96,14 @@ function status_bar(icon, foreground, background, percentage)
             bar_widget:update()
             image_widget:update()
         end,
-        update_background = function(self, new_background)
+        update_background = function(new_background)
             background = new_background
-            self.bg = background
+            -- self.bg = new_background
+            background_widget.bg = new_background
         end,
         -- wibox.widget.seperator,wibox.widget.seperator,
         {
-            {
-                {
-                    {
-                        wibox.widget.seperator,
-                        {
-                            text_widget,
-                            bar_widget,
-                            layout = wibox.layout.align.horizontal,
-                        },
-                        layout = wibox.layout.align.horizontal,
-                    },
-                    widget = wibox.container.margin,
-                    top = 6,
-                    bottom = 6,
-                    left = 45,
-                    right = 6,
-                },
-                widget = wibox.container.background,
-                bg = background,
-                shape = function(cr, width, height)
-                    gears.shape.rounded_rect(cr, width, height, 25)
-                end,
-                forced_width = 1000,
-                point = { x = 0, y = 0 }
-            },
+            background_widget,
             image_widget,
             layout = wibox.layout.manual,
         },

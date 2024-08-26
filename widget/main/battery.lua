@@ -1,13 +1,28 @@
-local status_bar = require("hover.widget.wrapper.status_bar")
 local gears = require("gears")
+
+local status_bar = require("hover.widget.wrapper.status_bar")
 local battery_bar = status_bar("battery-charging", "#A3BE8C", "#36402E", 75)
 
 gears.timer {
     
     callback = function ()
         awesome.connect_signal("battery::changed", function (a)
-            battery_bar.update_value(math.floor(a.percentage))
+            local final_value = 80
+            battery_bar.update_value(final_value)
             battery_bar.update_icon(a.icon_path)
+            if a.icon_path:match("([^/]+)$") == "battery-charging.svg" then
+                battery_bar.update_foreground("#A3BE8C")
+                battery_bar.update_background("#36402E")
+            elseif final_value < 30 then
+                battery_bar.update_foreground("#BF616A")
+                battery_bar.update_background("#402E2E")
+            elseif final_value < 70 then
+                battery_bar.update_foreground("#C6E7FC")
+                battery_bar.update_background("#2E3440")
+            else
+                battery_bar.update_foreground("#A3BE8C")
+                battery_bar.update_background("#36402E")
+            end
         end)
     end,
     autostart = true,
