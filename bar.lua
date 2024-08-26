@@ -63,7 +63,8 @@ function bar(args)
 	local brightness_slider = require("hover.widget.main.brightness")
 	local microphone_slider = require("hover.widget.main.microphone_slider")
 	local music_player = require("hover.widget.main.music_player")()
-	
+	local time_info = require("hover.widget.main.time_info")()
+
 	bar = wibox.widget {
 		{
 			{
@@ -126,46 +127,7 @@ function bar(args)
 				{
 					{
 						{
-							{
-								{
-									{
-										format = string.format("<span foreground='%s'>%s</span>", colors.text, "%H:%M"),
-										font = fonts.panel.clock,
-										widget = wibox.widget.textclock,
-										refresh = 1,
-									},
-									{
-										{
-											{
-												{
-													format = string.format("<span foreground='%s'>%s</span>", colors.text, "%B"),
-													font = fonts.panel.month_and_day,
-													widget = wibox.widget.textclock,
-												},
-												{
-													format = string.format("<span foreground='%s'>%s</span>", colors.text, "%A"),
-													font = fonts.panel.month_and_day,
-													widget = wibox.widget.textclock,
-												},
-												layout = wibox.layout.fixed.vertical,
-												spacing = -5
-											},
-											widget = wibox.container.margin,
-											top = 8,
-										},
-										widget = wibox.container.margin,
-										left = 7
-									},
-									layout = wibox.layout.fixed.horizontal,
-								},
-								nil,
-								{
-									format = string.format("<span foreground='%s'>%s</span>", colors.text, "%d/%m/%Y"),
-									font = fonts.panel.date,
-									widget = wibox.widget.textclock,
-								},
-								layout = wibox.layout.align.horizontal
-							},
+							time_info,
 							widget = wibox.container.margin,
 							left = 15,
 							right = 15,
@@ -500,6 +462,7 @@ function bar(args)
 		screen = args.screen,
 		minimum_width = 436,
 		minimum_height = 795,
+		ontop = true
 	}
 	return bar
 end

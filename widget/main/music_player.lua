@@ -155,7 +155,7 @@ local function get_track_name(service)
         GLib.Variant.new_string("Metadata")
     })
 
-    local result = bus:call_sync(string.format("org.mpris.MediaPlayer2.%s", service),
+    local result, err = bus:call_sync(string.format("org.mpris.MediaPlayer2.%s", service),
         "/org/mpris/MediaPlayer2",
         "org.freedesktop.DBus.Properties",
         "Get",
@@ -163,7 +163,10 @@ local function get_track_name(service)
         nil,
         Gio.DBusCallFlags.NONE,
         -1)
-
+        if err then
+            naughty.notify {title = tostring(err)}
+            return nil
+        end
     -- TODO: Access trackname with O(1)
     local track_name = nil
     for key, value in result[1]:pairs() do
@@ -209,7 +212,7 @@ local function get_artist_name(service)
         GLib.Variant.new_string("Metadata")
     })
 
-    local result = bus:call_sync(string.format("org.mpris.MediaPlayer2.%s", service),
+    local result, err = bus:call_sync(string.format("org.mpris.MediaPlayer2.%s", service),
         "/org/mpris/MediaPlayer2",
         "org.freedesktop.DBus.Properties",
         "Get",
@@ -220,6 +223,10 @@ local function get_artist_name(service)
 
     -- TODO: Access trackname with O(1)
     local artist_name = nil
+    if err then
+        naughty.notify {title = tostring(err)}
+        return nil
+    end
     for key, value in result[1]:pairs() do
         print(key, value)
         if key == "xesam:artist" then
@@ -295,6 +302,8 @@ local function music_player()
             get_track_name(current_player_name), get_artist_name(current_player_name)),
         font = fonts.panel.music_player.song_title,
         align = "left",
+        forced_width = 300,
+        forced_height = 1,
         widget = wibox.widget.textbox,
     }
 
