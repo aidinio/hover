@@ -1,7 +1,8 @@
--- gears = require("gears")
-cairo = require("lgi").cairo
+local gears = require("gears")
+local wibox = require("wibox")
+local cairo = require("lgi").cairo
 
-function svgsurf(context, cr, width, height)
+local function svgsurf(context, cr, width, height)
 	width = 30
 	height = 30
 	-- naughty.notify({
@@ -31,7 +32,7 @@ function svgsurf(context, cr, width, height)
 	-- return svg_surface
 end
 
-function switch(icon)
+local function switch(icon)
 	icon = icon or "bluetooth-connected"
 
 	local icon_widget = wibox.widget.base.make_widget_declarative {

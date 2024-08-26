@@ -1,7 +1,8 @@
-gears = require("gears")
-switch = require("hover.widget.wrapper.switch")
+local gears = require("gears")
+local awful = require("awful")
+local switch = require("hover.widget.wrapper.switch")
 
-function airplane()
+local function airplane()
    local airplane_widget = switch("airplane").widget
    airplane_widget.buttons  = gears.table.join(
 	  awful.button({}, 1, function ()

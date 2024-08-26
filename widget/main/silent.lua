@@ -1,7 +1,8 @@
-gears = require("gears")
-switch = require("hover.widget.wrapper.switch")
+local awful = require("awful")
+local gears = require("gears")
+local switch = require("hover.widget.wrapper.switch")
 
-function silent()
+local function silent()
    local silent_widget = switch("bell-slash").widget
    silent_widget.buttons  = gears.table.join(
 	  awful.button({}, 1, function ()

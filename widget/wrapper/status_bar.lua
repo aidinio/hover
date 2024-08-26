@@ -1,3 +1,7 @@
+local wibox = require("wibox")
+local awful = require("awful")
+local gears = require("gears")
+
 function status_bar(icon, foreground, background, percentage)
     icon = icons(icon)
     local image_widget = wibox.widget.base.make_widget_declarative {

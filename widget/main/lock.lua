@@ -1,4 +1,7 @@
+local awful = require("awful")
 local wibox = require("wibox")
+local gears = require("gears")
+
 local button = require("hover.widget.wrapper.button")
 local lock_widget = button("lock")
 

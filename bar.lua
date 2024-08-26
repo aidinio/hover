@@ -1,33 +1,9 @@
-wibox = require("wibox")
-gears = require("gears")
-naughty = require("naughty")
-beautiful = require("beautiful")
-awful = require("awful")
-cairo = require("lgi").cairo
+local wibox = require("wibox")
+local gears = require("gears")
+local naughty = require("naughty")
+local awful = require("awful")
 
 file_path = debug.getinfo(1, "S").source:sub(2):match("(.*[/\\])")
-
-custom_widget = wibox.widget {
-	widget = wibox.widget.base.make_widget,
-	fit = function(context, width, height)
-		return 100, 100
-	end,
-	draw = function(context, cr, width, height)
-		-- surf = gears.surface.load_uncached("./demo_assets/song_cover.jpg")
-		-- cr = cairo.Context(surf)
-		-- w, h = gears.surface.get_size(surf)
-		-- cr:rectangle(0, 0, w, h)
-		-- -- pat_h = cairo.Pattern.create_linear(0, 0, w, 0)
-		-- -- pat_h:add_color_stop_rgba(0 ,gears.color.parse_color("#282828"))
-		-- -- pat_h:add_color_stop_rgba(0.2 ,gears.color.parse_color("#282828"))
-		-- -- pat_h:add_color_stop_rgba(0.6 ,gears.color.parse_color("#282828" .. "BB"))
-		-- -- pat_h:add_color_stop_rgba(0.8 ,gears.color.parse_color("#282828" .. "99"))
-		-- -- pat_h:add_color_stop_rgba(1 ,gears.color.parse_color("#282828" .. "88"))
-		-- cr:set_source(pat_h)
-		-- cr:fill()
-		cairo_line_to(cr, 50, 50);
-	end
-}
 
 function bar(args)
 	theme_module = "hover.theme." .. args.theme

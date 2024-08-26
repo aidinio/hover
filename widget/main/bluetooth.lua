@@ -1,5 +1,6 @@
-gears = require("gears")
-switch = require("hover.widget.wrapper.switch")
+local gears = require("gears")
+local awful = require("awful")
+local switch = require("hover.widget.wrapper.switch")
 
 local custom_event = "my_event"
 

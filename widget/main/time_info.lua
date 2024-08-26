@@ -1,3 +1,5 @@
+local wibox = require("wibox")
+
 local function time_info()
     return {
         {

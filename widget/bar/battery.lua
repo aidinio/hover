@@ -1,3 +1,4 @@
+local wibox = require("wibox")
 local gears = require("gears")
 local naughty = require("naughty")
 local UPowerGlib = require("lgi").UPowerGlib

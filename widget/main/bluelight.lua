@@ -1,5 +1,7 @@
-gears = require("gears")
-switch = require("hover.widget.wrapper.switch")
+local gears = require("gears")
+local awful = require("awful")
+
+local switch = require("hover.widget.wrapper.switch")
 
 function bluelight()
    local bluelight_widget = switch("eyeglasses").widget

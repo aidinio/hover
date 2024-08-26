@@ -1,4 +1,8 @@
+local naughty = require("naughty")
+local wibox = require("wibox")
+local gears = require("gears")
 local lgi = require("lgi")
+local cairo = lgi.cairo
 local Gio = lgi.Gio
 local GLib = lgi.GLib
 

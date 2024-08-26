@@ -1,6 +1,7 @@
 local wibox = require("wibox")
+local gears = require("gears")
 
-function button(icon_name)
+local function button(icon_name)
     return wibox.widget.base.make_widget_declarative {
         {
             {
