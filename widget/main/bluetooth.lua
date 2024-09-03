@@ -4,7 +4,7 @@ local switch = require("hover.widget.wrapper.switch")
 
 local custom_event = "my_event"
 
-function airplane()
+local function bluetooth()
    local bluetooth_widget = switch("bluetooth").widget
    bluetooth_widget.buttons  = gears.table.join(
 	  awful.button({}, 1, function ()
@@ -16,4 +16,4 @@ function airplane()
 	}
 end
 
-return airplane
+return bluetooth

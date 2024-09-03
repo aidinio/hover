@@ -167,10 +167,10 @@ local function get_track_name(service)
         nil,
         Gio.DBusCallFlags.NONE,
         -1)
-        if err then
-            naughty.notify {title = tostring(err)}
-            return nil
-        end
+    if err then
+        naughty.notify { title = tostring(err) }
+        return nil
+    end
     -- TODO: Access trackname with O(1)
     local track_name = nil
     for key, value in result[1]:pairs() do
@@ -198,16 +198,16 @@ local function get_album_art(service)
         Gio.DBusCallFlags.NONE,
         -1)
 
-        -- TODO: Access trackname with O(1)
-        local track_name = nil
-        for key, value in result[1]:pairs() do
-            print(key, value)
-            if key == "mpris:artUrl" then
-                naughty.notify { title = value:get_string() }
-                track_name = value:get_string()
-                return track_name
-            end
+    -- TODO: Access trackname with O(1)
+    local track_name = nil
+    for key, value in result[1]:pairs() do
+        print(key, value)
+        if key == "mpris:artUrl" then
+            naughty.notify { title = value:get_string() }
+            track_name = value:get_string()
+            return track_name
         end
+    end
 end
 
 local function get_artist_name(service)
@@ -228,7 +228,7 @@ local function get_artist_name(service)
     -- TODO: Access trackname with O(1)
     local artist_name = nil
     if err then
-        naughty.notify {title = tostring(err)}
+        naughty.notify { title = tostring(err) }
         return nil
     end
     for key, value in result[1]:pairs() do
@@ -245,7 +245,9 @@ end
 local function music_player()
     local all_players = active_players()
     local current_player_index = 1
-    local current_player_name = all_players[current_player_index]:match("([^%.]+)$")
+    if all_players[current_player_index] ~= nil then
+        local current_player_name = all_players[current_player_index]:match("([^%.]+)$")
+    end
     local current_player_widget = wibox.widget.base.make_widget_declarative {
         markup = current_player_name,
         widget = wibox.widget.textbox,
@@ -299,7 +301,10 @@ local function music_player()
     end)
     play_button:connect_signal("button::press", function() play_pause(current_player_name) end)
     previous_button:connect_signal("button::press", function() previous(current_player_name) end)
-    next_button:connect_signal("button::press", function() next(current_player_name); naughty.notify{title = get_album_art(current_player_name)} end)
+    next_button:connect_signal("button::press",
+        function()
+            next(current_player_name); naughty.notify { title = get_album_art(current_player_name) }
+        end)
 
     local track_name_widget = wibox.widget.base.make_widget_declarative {
         markup = string.format("<span foreground='%s'>%s - %s</span>", colors.text,
